@@ -39,3 +39,12 @@ def test_simulate_gemm_falls_back_when_scalesim_missing() -> None:
         result = backend.simulate_gemm(32, 32, 32)
     assert result.backend == "analytic"
     assert result.compute_cycles > 0
+
+
+def test_probe_passes_constructor_scalesim_root() -> None:
+    custom_root = Path("/tmp/custom-wafer3d")
+    with patch.object(ScaleSimBackend, "_ensure_scalesim_import") as mock_import:
+        mock_import.return_value = False
+        backend = ScaleSimBackend(default_config(), repo_root=custom_root)
+    mock_import.assert_called_once_with(custom_root / "third_party" / "SCALE-Sim")
+    assert backend.scalesim_root == custom_root / "third_party" / "SCALE-Sim"

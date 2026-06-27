@@ -34,7 +34,7 @@ class ScaleSimBackend:
         self._available = self._probe()
 
     def _probe(self) -> bool:
-        return self._ensure_scalesim_import()
+        return self._ensure_scalesim_import(self.scalesim_root)
 
     @classmethod
     def _ensure_scalesim_import(cls, scalesim_root: Path | None = None) -> bool:
