@@ -95,7 +95,7 @@ class NoCConfig:
 class BackendPaths:
     ramulator_bin: Path = Path("third_party/ramulator2/build/ramulator2")
     booksim_bin: Path = Path("third_party/booksim2/src/booksim")
-    dsent_bin: Path = Path("third_party/dsent/dsent")
+    dsent_bin: Path = Path("third_party/dsent_standalone/dsent")
 
 
 @dataclass

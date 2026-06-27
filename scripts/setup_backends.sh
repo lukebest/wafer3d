@@ -29,11 +29,11 @@ build_booksim() {
 }
 
 build_dsent() {
-  if [ ! -d dsent ]; then
-    git clone --depth 1 https://github.com/dsent-group/dsent.git
+  if [ ! -d dsent_standalone ]; then
+    git clone --depth 1 https://github.com/gyb1325/Desent_modification.git dsent_standalone
   fi
-  cd dsent
-  make -j"$(nproc)" || true
+  cd dsent_standalone
+  make -j"$(nproc)" LDFLAGS="-no-pie" || true
   cd "$TP"
 }
 
@@ -49,4 +49,4 @@ build_dsent || echo "DSENT build failed; analytic power fallback will be used."
 echo "Done. Binaries expected at:"
 echo "  $TP/ramulator2/build/ramulator2"
 echo "  $TP/booksim2/src/booksim"
-echo "  $TP/dsent/dsent"
+echo "  $TP/dsent_standalone/dsent"

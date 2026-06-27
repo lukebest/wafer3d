@@ -1,5 +1,7 @@
 # wafer3d / voxelsim
 
+[中文文档](README.zh-CN.md)
+
 Compiler-aware end-to-end simulator for **3D-stacked AI chips**, modeled after the Voxel paper ([docs/voxel-simulator.md](docs/voxel-simulator.md)).
 
 ## Features
@@ -13,13 +15,48 @@ Compiler-aware end-to-end simulator for **3D-stacked AI chips**, modeled after t
 - **LLM workloads**: Llama2-13B, Gemma2-27B, OPT-30B, Llama3-70B, DiT-XL
 - **Compute paradigms**: SPMD, Dataflow, Compute-shift
 
+## Requirements
+
+| Component | Version |
+|-----------|---------|
+| Python | ≥ 3.10 |
+| pip / venv | recommended |
+
+Optional C++ backends (built via `scripts/setup_backends.sh`):
+
+| Tool | Used by |
+|------|---------|
+| `cmake`, `g++` | Ramulator 2.0 |
+| `flex`, `bison`, `g++` | BookSim 2.0 |
+| `g++`, `make` | DSENT |
+
+If a backend binary is missing or fails to build, the simulator falls back to analytic models automatically.
+
 ## Install
 
 ```bash
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
-# Optional: build C++ backends (Ramulator, BookSim, DSENT)
+```
+
+### Optional: C++ backends
+
+Build Ramulator 2.0, BookSim 2.0, and DSENT under `third_party/`:
+
+```bash
 bash scripts/setup_backends.sh
 ```
+
+Expected binaries after a successful build:
+
+| Backend | Path |
+|---------|------|
+| Ramulator 2.0 | `third_party/ramulator2/build/ramulator2` |
+| BookSim 2.0 | `third_party/booksim2/src/booksim` |
+| DSENT | `third_party/dsent_standalone/dsent` |
+
+Paths are configured in [configs/default.yaml](configs/default.yaml). DSENT uses the [Desent_modification](https://github.com/gyb1325/Desent_modification) fork with `LDFLAGS="-no-pie"` on Linux.
 
 ## Quick start
 
@@ -28,11 +65,24 @@ bash scripts/setup_backends.sh
 python -m voxelsim.cli --model llama2-13b --stage prefill --layers 2
 
 # High-precision NoC via BookSim (requires build)
-python -m voxelsim.cli --noc-backend booksim --model llama2-13b
+python -m voxelsim.cli --noc-backend booksim --model llama2-13b --stage prefill
 
 # Pareto frontier search
 python -m voxelsim.cli --pareto --model llama2-13b
 ```
+
+Output is JSON with cycle counts, energy, and per-component breakdown.
+
+### CLI options
+
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--config PATH` | `configs/default.yaml` | Chip / system YAML |
+| `--model NAME` | `llama2-13b` | `llama2-13b`, `gemma2-27b`, `opt-30b`, `llama3-70b`, `dit-xl` |
+| `--stage STAGE` | `prefill` | `prefill` or `decode` |
+| `--layers N` | `2` | Transformer layers to simulate |
+| `--noc-backend BACKEND` | from config | `analytic` or `booksim` |
+| `--pareto` | off | Run Pareto design-space exploration |
 
 ## Python API
 
@@ -46,6 +96,33 @@ prog = build_program_for_paradigm(cfg, LLAMA2_13B, stage="decode")
 graph = prog.build_graph(cfg.num_cores)
 stats = SimulationEngine(cfg).run(graph)
 print(stats.total_cycles, stats.noc_overhead_cycles)
+```
+
+Load a custom chip configuration:
+
+```python
+from voxelsim.chip.config import ChipConfig
+
+cfg = ChipConfig.from_yaml("configs/default.yaml")
+```
+
+## Simulation stack
+
+```
+DL model + chip spec
+       ↓
+Program (compute / copy_data / sync + collectives)
+       ↓
+Execution graph (events + dependencies)
+       ↓
+SimulationEngine
+  ├── Core model   (ScaleSim v3 or analytic)
+  ├── NoC model    (analytic Tier-A or BookSim Tier-B)
+  ├── DRAM model   (Ramulator 2.0 per-channel or analytic)
+  ├── Thermal      (power-density throttling)
+  └── Energy       (DSENT NoC + ReGate-style breakdown)
+       ↓
+Stats (cycles, energy, breakdown)
 ```
 
 ## Tests
@@ -65,10 +142,10 @@ voxelsim/
   backends/     # ScaleSim, Ramulator, BookSim, DSENT
   models/       # LLM + compute paradigms
   explore/      # Pareto search
-configs/        # default.yaml (Table 2/3)
+configs/        # default.yaml, dsent_router.cfg
 scripts/        # setup_backends.sh
 tests/
-docs/           # voxel-simulator.md (reference)
+docs/           # voxel-simulator.md (paper reference, Chinese)
 ```
 
 ## Configuration
@@ -77,11 +154,20 @@ See [configs/default.yaml](configs/default.yaml). Key knobs match paper Table 2/
 
 | Parameter | Default |
 |-----------|---------|
-| Computation paradigm | compute_shift |
-| NoC topology | mesh_2d |
+| Computation paradigm | `compute_shift` |
+| NoC topology | `mesh_2d` |
 | DRAM bandwidth | 12 TB/s |
 | Cores | 256 |
-| NoC backend | analytic (`booksim` for Tier-B) |
+| NoC backend | `analytic` (`booksim` for Tier-B) |
+| Frequency | 1.6 GHz |
+| Batch size / seq len | 32 / 2048 |
+
+## References
+
+- Liu et al., *Exploring the Efficiency of 3D-Stacked AI Chip Architecture for LLM Inference with Voxel*, arXiv:2604.26821, 2026 — see [docs/voxel-simulator.md](docs/voxel-simulator.md)
+- [ScaleSim v3](https://github.com/scalesim-project/scalesim-v3)
+- [Ramulator 2.0](https://github.com/CMU-SAFARI/ramulator2)
+- [BookSim 2.0](https://github.com/booksim/booksim2)
 
 ## License
 

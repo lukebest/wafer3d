@@ -47,4 +47,4 @@ area_mm2:
 backends:
   ramulator_bin: third_party/ramulator2/build/ramulator2
   booksim_bin: third_party/booksim2/src/booksim
-  dsent_bin: third_party/dsent/dsent
+  dsent_bin: third_party/dsent_standalone/dsent
