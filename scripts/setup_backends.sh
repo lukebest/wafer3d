@@ -13,6 +13,7 @@ build_ramulator() {
     git clone --depth 1 https://github.com/CMU-SAFARI/ramulator2.git
   fi
   cd ramulator2
+  patch -p1 -N -i "$ROOT/scripts/patches/ramulator2-drain.patch" || true
   mkdir -p build && cd build
   cmake .. -DCMAKE_BUILD_TYPE=Release
   cmake --build . -j"$(nproc)"
