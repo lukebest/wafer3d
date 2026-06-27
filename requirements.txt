@@ -2,5 +2,5 @@ numpy>=1.24
 numba>=0.58
 pyyaml>=6.0
 pandas>=2.0
-scalesim>=3.0
 pytest>=7.4
+# SCALE-Sim: pip install -e third_party/SCALE-Sim  (see scripts/setup_backends.sh)

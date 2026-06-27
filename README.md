@@ -9,7 +9,7 @@ Compiler-aware end-to-end simulator for **3D-stacked AI chips**, modeled after t
 - **Software interface**: `compute()`, `copy_data()`, `sync()` + collectives (`allReduce`, `allGather`, …)
 - **Execution graph** generation with dependency tracking
 - **Tier-A / Tier-B NoC**: analytic model (default) + BookSim 2.0 (cycle-accurate) with traffic pattern cache
-- **AI core**: ScaleSim v3 (GEMM) with analytic fallback
+- **AI core**: [SCALE-Sim](https://github.com/scalesim-project/SCALE-Sim) v3 (GEMM) with analytic fallback
 - **DRAM**: Ramulator 2.0 per-channel simulation with XOR trace coalescing (numba)
 - **Thermal** power-density throttling, **DSENT** NoC energy, Pareto design-space exploration
 - **LLM workloads**: Llama2-13B, Gemma2-27B, OPT-30B, Llama3-70B, DiT-XL
@@ -22,10 +22,11 @@ Compiler-aware end-to-end simulator for **3D-stacked AI chips**, modeled after t
 | Python | ≥ 3.10 |
 | pip / venv | recommended |
 
-Optional C++ backends (built via `scripts/setup_backends.sh`):
+Optional backends (via `scripts/setup_backends.sh`):
 
 | Tool | Used by |
 |------|---------|
+| `pip`, Python venv | SCALE-Sim (editable install) |
 | `cmake`, `g++` | Ramulator 2.0 |
 | `flex`, `bison`, `g++` | BookSim 2.0 |
 | `g++`, `make` | DSENT |
@@ -40,23 +41,32 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 ```
 
-### Optional: C++ backends
+### Optional: third-party backends
 
-Build Ramulator 2.0, BookSim 2.0, and DSENT under `third_party/`:
+Build SCALE-Sim, Ramulator 2.0, BookSim 2.0, and DSENT under `third_party/`:
 
 ```bash
 bash scripts/setup_backends.sh
 ```
 
-Expected binaries after a successful build:
+Or install SCALE-Sim only:
+
+```bash
+pip install -e third_party/SCALE-Sim
+```
+
+Expected paths after a successful build:
 
 | Backend | Path |
 |---------|------|
+| SCALE-Sim | `third_party/SCALE-Sim/` (editable Python package) |
 | Ramulator 2.0 | `third_party/ramulator2/build/ramulator2` |
 | BookSim 2.0 | `third_party/booksim2/src/booksim` |
 | DSENT | `third_party/dsent_standalone/dsent` |
 
-Paths are configured in [configs/default.yaml](configs/default.yaml). DSENT uses the [Desent_modification](https://github.com/gyb1325/Desent_modification) fork with `LDFLAGS="-no-pie"` on Linux.
+SCALE-Sim requires a small NumPy compatibility patch (`scripts/patches/scalesim-numpy-max.patch`), applied automatically by `setup_backends.sh`.
+
+Ramulator / BookSim / DSENT paths are configured in [configs/default.yaml](configs/default.yaml). DSENT uses the [Desent_modification](https://github.com/gyb1325/Desent_modification) fork with `LDFLAGS="-no-pie"` on Linux.
 
 ## Quick start
 
@@ -116,7 +126,7 @@ Program (compute / copy_data / sync + collectives)
 Execution graph (events + dependencies)
        ↓
 SimulationEngine
-  ├── Core model   (ScaleSim v3 or analytic)
+  ├── Core model   (SCALE-Sim v3 or analytic)
   ├── NoC model    (analytic Tier-A or BookSim Tier-B)
   ├── DRAM model   (Ramulator 2.0 per-channel or analytic)
   ├── Thermal      (power-density throttling)
@@ -139,7 +149,7 @@ voxelsim/
   graph/        # Execution graph
   chip/         # Config, topology, mapping
   sim/          # Engine, NoC, DRAM, thermal, energy
-  backends/     # ScaleSim, Ramulator, BookSim, DSENT
+  backends/     # SCALE-Sim, Ramulator, BookSim, DSENT
   models/       # LLM + compute paradigms
   explore/      # Pareto search
 configs/        # default.yaml, dsent_router.cfg
@@ -165,7 +175,7 @@ See [configs/default.yaml](configs/default.yaml). Key knobs match paper Table 2/
 ## References
 
 - Liu et al., *Exploring the Efficiency of 3D-Stacked AI Chip Architecture for LLM Inference with Voxel*, arXiv:2604.26821, 2026 — see [docs/voxel-simulator.md](docs/voxel-simulator.md)
-- [ScaleSim v3](https://github.com/scalesim-project/scalesim-v3)
+- [SCALE-Sim](https://github.com/scalesim-project/SCALE-Sim) (v3, in `third_party/SCALE-Sim`)
 - [Ramulator 2.0](https://github.com/CMU-SAFARI/ramulator2)
 - [BookSim 2.0](https://github.com/booksim/booksim2)
 

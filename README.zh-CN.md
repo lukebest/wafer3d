@@ -9,7 +9,7 @@
 - **软件接口**：`compute()`、`copy_data()`、`sync()` 及集合通信（`allReduce`、`allGather` 等）
 - **执行图**自动生成与依赖追踪
 - **双层 NoC 模型**：Tier-A 解析模型（默认）+ Tier-B BookSim 2.0 周期精确仿真，含流量模式缓存
-- **AI 核心**：ScaleSim v3（GEMM），不可用时降级为解析模型
+- **AI 核心**：[SCALE-Sim](https://github.com/scalesim-project/SCALE-Sim) v3（GEMM），不可用时降级为解析模型
 - **DRAM**：Ramulator 2.0 逐通道仿真 + XOR 匹配 trace 合并（numba 加速）
 - **热节流**（功率密度约束）、**DSENT** NoC 能耗建模、**Pareto** 设计空间探索
 - **LLM 工作负载**：Llama2-13B、Gemma2-27B、OPT-30B、Llama3-70B、DiT-XL
@@ -22,10 +22,11 @@
 | Python | ≥ 3.10 |
 | pip / venv | 推荐使用 |
 
-可选 C++ 后端（通过 `scripts/setup_backends.sh` 构建）：
+可选后端（通过 `scripts/setup_backends.sh` 构建）：
 
 | 工具 | 用途 |
 |------|------|
+| `pip`、Python venv | SCALE-Sim（editable 安装） |
 | `cmake`、`g++` | Ramulator 2.0 |
 | `flex`、`bison`、`g++` | BookSim 2.0 |
 | `g++`、`make` | DSENT |
@@ -40,23 +41,32 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"
 ```
 
-### 可选：构建 C++ 后端
+### 可选：构建 third-party 后端
 
-在 `third_party/` 下构建 Ramulator 2.0、BookSim 2.0 和 DSENT：
+在 `third_party/` 下构建 SCALE-Sim、Ramulator 2.0、BookSim 2.0 和 DSENT：
 
 ```bash
 bash scripts/setup_backends.sh
 ```
 
-构建成功后，二进制路径如下：
+或仅安装 SCALE-Sim：
+
+```bash
+pip install -e third_party/SCALE-Sim
+```
+
+构建成功后的路径：
 
 | 后端 | 路径 |
 |------|------|
+| SCALE-Sim | `third_party/SCALE-Sim/`（editable Python 包） |
 | Ramulator 2.0 | `third_party/ramulator2/build/ramulator2` |
 | BookSim 2.0 | `third_party/booksim2/src/booksim` |
 | DSENT | `third_party/dsent_standalone/dsent` |
 
-路径在 [configs/default.yaml](configs/default.yaml) 中配置。DSENT 使用 [Desent_modification](https://github.com/gyb1325/Desent_modification) 分支，Linux 下需 `LDFLAGS="-no-pie"`。BookSim 需先安装 `flex` 和 `bison`。
+SCALE-Sim 需应用 NumPy 兼容补丁（`scripts/patches/scalesim-numpy-max.patch`），`setup_backends.sh` 会自动处理。
+
+Ramulator / BookSim / DSENT 路径在 [configs/default.yaml](configs/default.yaml) 中配置。DSENT 使用 [Desent_modification](https://github.com/gyb1325/Desent_modification) 分支，Linux 下需 `LDFLAGS="-no-pie"`。BookSim 需先安装 `flex` 和 `bison`。
 
 ## 快速开始
 
@@ -116,7 +126,7 @@ Program（compute / copy_data / sync + 集合通信）
 执行图（事件 + 依赖边）
        ↓
 SimulationEngine
-  ├── 核心模型   （ScaleSim v3 或解析模型）
+  ├── 核心模型   （SCALE-Sim v3 或解析模型）
   ├── NoC 模型   （Tier-A 解析 或 Tier-B BookSim）
   ├── DRAM 模型  （Ramulator 2.0 逐通道 或解析模型）
   ├── 热模型     （功率密度节流）
@@ -139,7 +149,7 @@ voxelsim/
   graph/        # 执行图
   chip/         # 配置、拓扑、映射
   sim/          # 引擎、NoC、DRAM、热、能耗
-  backends/     # ScaleSim、Ramulator、BookSim、DSENT
+  backends/     # SCALE-Sim、Ramulator、BookSim、DSENT
   models/       # LLM 模型与计算范式
   explore/      # Pareto 搜索
 configs/        # default.yaml、dsent_router.cfg
@@ -165,7 +175,7 @@ docs/           # voxel-simulator.md（论文技术参考）
 ## 参考文献
 
 - Liu et al., *Exploring the Efficiency of 3D-Stacked AI Chip Architecture for LLM Inference with Voxel*, arXiv:2604.26821, 2026 — 详见 [docs/voxel-simulator.md](docs/voxel-simulator.md)
-- [ScaleSim v3](https://github.com/scalesim-project/scalesim-v3)
+- [SCALE-Sim](https://github.com/scalesim-project/SCALE-Sim)（v3，位于 `third_party/SCALE-Sim`）
 - [Ramulator 2.0](https://github.com/CMU-SAFARI/ramulator2)
 - [BookSim 2.0](https://github.com/booksim/booksim2)
 

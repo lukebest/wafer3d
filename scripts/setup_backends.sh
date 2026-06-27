@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
-# Build third-party simulators: Ramulator 2.0, BookSim 2.0, DSENT
+# Build third-party simulators: SCALE-Sim, Ramulator 2.0, BookSim 2.0, DSENT
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 TP="$ROOT/third_party"
+PIP="${PIP:-python3 -m pip}"
 
 mkdir -p "$TP"
 cd "$TP"
+
+build_scalesim() {
+  if [ ! -d SCALE-Sim ]; then
+    git clone --depth 1 https://github.com/scalesim-project/SCALE-Sim.git
+  fi
+  cd SCALE-Sim
+  patch -p1 -N -i "$ROOT/scripts/patches/scalesim-numpy-max.patch" || true
+  cd "$TP"
+  $PIP install -e "$TP/SCALE-Sim"
+}
 
 build_ramulator() {
   if [ ! -d ramulator2 ]; then
@@ -38,6 +49,9 @@ build_dsent() {
   cd "$TP"
 }
 
+echo "Building SCALE-Sim..."
+build_scalesim || echo "SCALE-Sim install failed; analytic core fallback will be used."
+
 echo "Building Ramulator 2.0..."
 build_ramulator || echo "Ramulator build failed; analytic DRAM fallback will be used."
 
@@ -47,7 +61,8 @@ build_booksim || echo "BookSim build failed; analytic NoC fallback will be used.
 echo "Building DSENT..."
 build_dsent || echo "DSENT build failed; analytic power fallback will be used."
 
-echo "Done. Binaries expected at:"
+echo "Done. Expected paths:"
+echo "  $TP/SCALE-Sim/  (pip install -e)"
 echo "  $TP/ramulator2/build/ramulator2"
 echo "  $TP/booksim2/src/booksim"
 echo "  $TP/dsent_standalone/dsent"
