@@ -1,0 +1,50 @@
+# Default chip configuration (Table 2/3 from Voxel paper)
+
+software:
+  computation_paradigm: compute_shift
+  tile_to_core_mapping: dimension_ordered
+  tensor_to_bank_mapping: software_aware
+
+hardware:
+  noc_topology: mesh_2d
+  dram_bandwidth_tbps: 12.0
+  num_cores: 256
+  systolic_array_size: 32
+  core_group_size: 8
+  noc_link_bandwidth_bytes_per_cycle: 32
+  per_core_sram_kb: 2048
+
+dram:
+  layer_count: 8
+  banks_per_layer: 16
+  capacity_gb: 192
+  interface_bytes: 128
+  timing:
+    tCL: 14
+    tRCD: 14
+    tRP: 14
+    tRAS: 34
+  burst_length: auto
+
+system:
+  frequency_ghz: 1.6
+  power_density_limit_w_per_mm2: 0.7
+  batch_size: 32
+  sequence_length: 2048
+  precision: bf16
+
+noc:
+  backend: analytic  # analytic | booksim
+  routing: dimension_order
+
+area_mm2:
+  systolic_arrays: 260.0
+  srams: 433.0
+  tsvs: 18.4
+  other: 91.2
+  per_die_limit: 850.0
+
+backends:
+  ramulator_bin: third_party/ramulator2/build/ramulator2
+  booksim_bin: third_party/booksim2/src/booksim
+  dsent_bin: third_party/dsent/dsent

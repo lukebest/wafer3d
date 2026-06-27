@@ -4,31 +4,31 @@ overview: 从零实现一个与论文 Voxel 能力一致的高性能 3D 堆叠 A
 todos:
   - id: p0
     content: "Phase 0: 脚手架 pyproject/requirements + chip/config.py 表达 Table 2/3/4 默认值"
-    status: pending
+    status: completed
   - id: p1
     content: "Phase 1: 实现 api (compute/copy_data/sync + collectives) 与 graph/builder 执行图"
-    status: pending
+    status: completed
   - id: p2
     content: "Phase 2: chip/topology (mesh/torus/all-to-all) + mapping 策略 + noc_sim 分层模型 (Tier-A 解析)"
-    status: pending
+    status: completed
   - id: p3
     content: "Phase 3: 集成 ScaleSim v3 + Ramulator 2.0 + BookSim 2.0 后端 (构建脚本 + 解析 + 缓存 + 降级桩)"
-    status: pending
+    status: completed
   - id: p4
     content: "Phase 4: sim/engine 事件驱动遍历 + dram_sim per-channel 优先队列 + 端到端统计"
-    status: pending
+    status: completed
   - id: p5
     content: "Phase 5: DRAM trace_coalesce (XOR match-key, N=32, numba) + refresh + NoC 流量模式缓存"
-    status: pending
+    status: completed
   - id: p6
     content: "Phase 6: thermal 节流 + energy 分解 (DSENT NoC + ReGate) + explore/pareto 坐标下降搜索"
-    status: pending
+    status: completed
   - id: p7
     content: "Phase 7: models/llm 五个模型 prefill/decode 图 + paradigms 三种计算范式"
-    status: pending
+    status: completed
   - id: p8
     content: "Phase 8: 单元/端到端/合并正确性测试 + 自洽性趋势复现 + README"
-    status: pending
+    status: completed
 isProject: false
 ---
 
