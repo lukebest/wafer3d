@@ -37,6 +37,9 @@ class RamulatorBackend:
     """Per-channel DRAM simulation via Ramulator 2.0 subprocess or analytic fallback."""
 
     PAGE_BITS = 12
+    BANK_BITS = 3
+    BANK_MASK = (1 << BANK_BITS) - 1
+    ROW_SHIFT = PAGE_BITS + BANK_BITS
 
     def __init__(self, config: ChipConfig, repo_root: Path | None = None) -> None:
         self.config = config
@@ -224,12 +227,14 @@ class RamulatorBackend:
         results: list[_RowAccess] = []
 
         for req in requests:
+            bank = self._bank_id(req.addr)
+            row = self._row_id(req.addr)
+
             if req.is_write:
+                open_rows[bank] = row
                 results.append(_RowAccess(kind="write", latency=write_lat))
                 continue
 
-            bank = (req.addr >> self.PAGE_BITS) & 0xFF
-            row = req.addr >> self.PAGE_BITS
             open_row = open_rows.get(bank)
             if open_row is None:
                 kind = "miss"
@@ -244,6 +249,15 @@ class RamulatorBackend:
             results.append(_RowAccess(kind=kind, latency=latency))
 
         return results
+
+    @classmethod
+    def _bank_id(cls, addr: int) -> int:
+        """DDR4 bank index from address bits [14:12]."""
+        return (addr >> cls.PAGE_BITS) & cls.BANK_MASK
+
+    @classmethod
+    def _row_id(cls, addr: int) -> int:
+        return addr >> cls.ROW_SHIFT
 
     @staticmethod
     def _count_access_kinds(accesses: list[_RowAccess]) -> dict[str, int]:

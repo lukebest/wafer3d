@@ -87,3 +87,30 @@ def test_simulate_trace_uses_ramulator_when_binary_available() -> None:
     results = backend.simulate_trace(requests, channel_id=0)
     assert results
     assert results[0].backend == "ramulator"
+
+
+def test_write_updates_row_buffer_for_subsequent_read() -> None:
+    backend = RamulatorBackend(default_config())
+    accesses = backend._classify_row_accesses(
+        [
+            DramRequest(addr=0x1000, is_write=True, arrival_cycle=0),
+            DramRequest(addr=0x1008, is_write=False, arrival_cycle=1),
+        ]
+    )
+    assert accesses[0].kind == "write"
+    assert accesses[1].kind == "hit"
+
+
+def test_bank_id_uses_ddr4_three_bank_bits() -> None:
+    assert RamulatorBackend._bank_id(0x0000) == 0
+    assert RamulatorBackend._bank_id(0x8000) == 0
+    assert RamulatorBackend._bank_id(0x1000) == 1
+
+    backend = RamulatorBackend(default_config())
+    accesses = backend._classify_row_accesses(
+        [
+            DramRequest(addr=0x0000, is_write=False, arrival_cycle=0),
+            DramRequest(addr=0x8000, is_write=False, arrival_cycle=1),
+        ]
+    )
+    assert accesses[1].kind == "conflict"
