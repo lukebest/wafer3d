@@ -4,28 +4,28 @@ overview: Fix the four engine modeling gaps that currently flatten paper trends 
 todos:
   - id: fix-noc
     content: 重构 engine.run() 按 SYNC region 批量估计 NoC 传输，使 noc_overhead_cycles 反映竞争（SPMD > compute-shift）
-    status: pending
+    status: completed
   - id: fix-bank
     content: 在引擎接入 MappingPlanner，将 tensor-to-bank 策略落到 dram_sim 的 burst 寻址，使 uniform/software_aware 产生不同 row_conflict
-    status: pending
+    status: completed
   - id: fix-dram-read
     content: 为 COMPUTE 的 DRAM 输入张量生成隐式 DRAM 读请求，使 decode 出现非零 DRAM/row-conflict 且随带宽变化
-    status: pending
+    status: completed
   - id: fix-dataflow
     content: 修正 build_dataflow_layer 为单算子流水重叠，消除 ~37x 异常开销
-    status: pending
+    status: completed
   - id: fix-coregroup
     content: 在 dram_sim 增加 core group request tracker：组内同 row 请求合并，组越大冲突越少
-    status: pending
+    status: completed
   - id: regress
     content: 运行 pytest tests/ -q 并按新行为更新趋势断言，确保全绿
-    status: pending
+    status: completed
   - id: runner
     content: 新增 scripts/run_reproduction.py 运行 A-H 实验并输出 JSON + markdown 表
-    status: pending
+    status: completed
   - id: report
     content: 生成 docs/voxel-reproduction-report.md（论文 vs simulator 逐项 PASS/PARTIAL/FAIL + 原因 + 复现率小结），并在 voxel-experiments-reproduction.md 末尾加链接
-    status: pending
+    status: completed
 isProject: false
 ---
 

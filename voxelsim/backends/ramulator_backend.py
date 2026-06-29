@@ -19,6 +19,7 @@ class DramRequest:
     is_write: bool
     arrival_cycle: int
     event_id: int = 0
+    core_id: int = 0
 
 
 @dataclass
@@ -251,9 +252,13 @@ class RamulatorBackend:
         return results
 
     @classmethod
-    def _bank_id(cls, addr: int) -> int:
+    def bank_id(cls, addr: int) -> int:
         """DDR4 bank index from address bits [14:12]."""
         return (addr >> cls.PAGE_BITS) & cls.BANK_MASK
+
+    @classmethod
+    def _bank_id(cls, addr: int) -> int:
+        return cls.bank_id(addr)
 
     @classmethod
     def _row_id(cls, addr: int) -> int:

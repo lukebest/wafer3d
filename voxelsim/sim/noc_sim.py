@@ -42,9 +42,9 @@ class AnalyticNoCModel:
     def __post_init__(self) -> None:
         self.topology = ChipTopology(self.config)
         self.link_bw = self.config.noc.link_bandwidth_bytes_per_cycle
-        # NoC bandwidth strictly lower than SRAM read bandwidth (paper §5.4)
-        sram_read_bw = self.config.per_core_sram_bytes  # bytes/cycle upper bound proxy
-        self.effective_link_bw = min(self.link_bw, sram_read_bw // 4)
+        # NoC bandwidth capped by per-core SRAM read throughput (paper §4.5)
+        sram_read_bw = max(4, self.config.per_core_sram_kb // 64)
+        self.effective_link_bw = min(self.link_bw, sram_read_bw)
 
     def _single_latency(self, t: NoCTransfer) -> int:
         if t.src_core == t.dst_core:

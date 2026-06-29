@@ -1,0 +1,675 @@
+{
+  "generated_at": "2026-06-29T02:49:06.148750+00:00",
+  "quick_mode": true,
+  "models": [
+    "Llama2-13B"
+  ],
+  "results": [
+    {
+      "experiment": "A_paradigm",
+      "label": "spmd",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2092319,
+      "noc_overhead_cycles": 286734,
+      "noc_pct": 13.704124466680272,
+      "dram_access_cycles": 3630592,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.028532308300044804,
+      "extra": {}
+    },
+    {
+      "experiment": "A_paradigm",
+      "label": "spmd",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1128415,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3982577331921323,
+      "dram_access_cycles": 2472960,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015280031500000702,
+      "extra": {}
+    },
+    {
+      "experiment": "A_paradigm",
+      "label": "dataflow",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 25471362,
+      "noc_overhead_cycles": 0,
+      "noc_pct": 0.0,
+      "dram_access_cycles": 1834560,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.30273545199999996,
+      "extra": {}
+    },
+    {
+      "experiment": "A_paradigm",
+      "label": "dataflow",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 3955042,
+      "noc_overhead_cycles": 0,
+      "noc_pct": 0.0,
+      "dram_access_cycles": 1236480,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.046813695,
+      "extra": {}
+    },
+    {
+      "experiment": "A_paradigm",
+      "label": "compute_shift",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2108372,
+      "noc_overhead_cycles": 286734,
+      "noc_pct": 13.599782201622864,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.028594830300044803,
+      "extra": {}
+    },
+    {
+      "experiment": "A_paradigm",
+      "label": "compute_shift",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {}
+    },
+    {
+      "experiment": "B_noc_mapping",
+      "label": "sequential_mesh_2d",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2108372,
+      "noc_overhead_cycles": 286734,
+      "noc_pct": 13.599782201622864,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.028594830300044803,
+      "extra": {
+        "mapping": "sequential",
+        "topology": "mesh_2d"
+      }
+    },
+    {
+      "experiment": "B_noc_mapping",
+      "label": "sequential_torus_2d",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2026448,
+      "noc_overhead_cycles": 204810,
+      "noc_pct": 10.106847054550622,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.027652704300032003,
+      "extra": {
+        "mapping": "sequential",
+        "topology": "torus_2d"
+      }
+    },
+    {
+      "experiment": "B_noc_mapping",
+      "label": "sequential_all_to_all",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 1965005,
+      "noc_overhead_cycles": 0,
+      "noc_pct": 0.0,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0269461098,
+      "extra": {
+        "mapping": "sequential",
+        "topology": "all_to_all"
+      }
+    },
+    {
+      "experiment": "B_noc_mapping",
+      "label": "dimension_ordered_mesh_2d",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2108372,
+      "noc_overhead_cycles": 286734,
+      "noc_pct": 13.599782201622864,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.028594830300044803,
+      "extra": {
+        "mapping": "dimension_ordered",
+        "topology": "mesh_2d"
+      }
+    },
+    {
+      "experiment": "B_noc_mapping",
+      "label": "dimension_ordered_torus_2d",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2026448,
+      "noc_overhead_cycles": 204810,
+      "noc_pct": 10.106847054550622,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.027652704300032003,
+      "extra": {
+        "mapping": "dimension_ordered",
+        "topology": "torus_2d"
+      }
+    },
+    {
+      "experiment": "B_noc_mapping",
+      "label": "dimension_ordered_all_to_all",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 1965005,
+      "noc_overhead_cycles": 0,
+      "noc_pct": 0.0,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0269461098,
+      "extra": {
+        "mapping": "dimension_ordered",
+        "topology": "all_to_all"
+      }
+    },
+    {
+      "experiment": "C_tensor_bank",
+      "label": "uniform",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 895562,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.5018078033681643,
+      "dram_access_cycles": 560000,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0124047130000007,
+      "extra": {
+        "mapping": "uniform"
+      }
+    },
+    {
+      "experiment": "C_tensor_bank",
+      "label": "interleave_size",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1784198,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.2518778745408301,
+      "dram_access_cycles": 7644448,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0233546107000007,
+      "extra": {
+        "mapping": "interleave_size"
+      }
+    },
+    {
+      "experiment": "C_tensor_bank",
+      "label": "software_aware",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "mapping": "software_aware"
+      }
+    },
+    {
+      "experiment": "D_noc_bw",
+      "label": "link_4B",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 3255252,
+      "noc_overhead_cycles": 2293774,
+      "noc_pct": 70.46379205050792,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.041783950300358405,
+      "extra": {
+        "link_bw": 4
+      }
+    },
+    {
+      "experiment": "D_noc_bw",
+      "label": "link_8B",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2599892,
+      "noc_overhead_cycles": 1146894,
+      "noc_pct": 44.113140084280424,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.034247310300179204,
+      "extra": {
+        "link_bw": 8
+      }
+    },
+    {
+      "experiment": "D_noc_bw",
+      "label": "link_16B",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2272212,
+      "noc_overhead_cycles": 573454,
+      "noc_pct": 25.237697890865817,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0304789903000896,
+      "extra": {
+        "link_bw": 16
+      }
+    },
+    {
+      "experiment": "D_noc_bw",
+      "label": "link_32B",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2108372,
+      "noc_overhead_cycles": 286734,
+      "noc_pct": 13.599782201622864,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.028594830300044803,
+      "extra": {
+        "link_bw": 32
+      }
+    },
+    {
+      "experiment": "E_dram_bw",
+      "label": "4TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1747952,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.25710088148873655,
+      "dram_access_cycles": 7409472,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0229135498000007,
+      "extra": {
+        "dram_bw_tbps": 4
+      }
+    },
+    {
+      "experiment": "E_dram_bw",
+      "label": "8TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1284860,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3497657332316361,
+      "dram_access_cycles": 3704736,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.017205940900000702,
+      "extra": {
+        "dram_bw_tbps": 8
+      }
+    },
+    {
+      "experiment": "E_dram_bw",
+      "label": "12TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "dram_bw_tbps": 12
+      }
+    },
+    {
+      "experiment": "E_dram_bw",
+      "label": "16TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1053313,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.4266538056589067,
+      "dram_access_cycles": 1852360,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.014352124125000702,
+      "extra": {
+        "dram_bw_tbps": 16
+      }
+    },
+    {
+      "experiment": "F_core_group",
+      "label": "group_1",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "core_group": 1
+      }
+    },
+    {
+      "experiment": "F_core_group",
+      "label": "group_2",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "core_group": 2
+      }
+    },
+    {
+      "experiment": "F_core_group",
+      "label": "group_4",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "core_group": 4
+      }
+    },
+    {
+      "experiment": "F_core_group",
+      "label": "group_8",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "core_group": 8
+      }
+    },
+    {
+      "experiment": "F_core_group",
+      "label": "group_16",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "core_group": 16
+      }
+    },
+    {
+      "experiment": "G_sram",
+      "label": "512KB_prefill",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2599892,
+      "noc_overhead_cycles": 1146894,
+      "noc_pct": 44.113140084280424,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.034247310300179204,
+      "extra": {
+        "sram_kb": 512
+      }
+    },
+    {
+      "experiment": "G_sram",
+      "label": "512KB_decode",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1138176,
+      "noc_overhead_cycles": 17934,
+      "noc_pct": 1.5756789811066128,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015391724600002802,
+      "extra": {
+        "sram_kb": 512
+      }
+    },
+    {
+      "experiment": "G_sram",
+      "label": "2048KB_prefill",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2108372,
+      "noc_overhead_cycles": 286734,
+      "noc_pct": 13.599782201622864,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.028594830300044803,
+      "extra": {
+        "sram_kb": 2048
+      }
+    },
+    {
+      "experiment": "G_sram",
+      "label": "2048KB_decode",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "sram_kb": 2048
+      }
+    },
+    {
+      "experiment": "G_sram",
+      "label": "8192KB_prefill",
+      "model": "Llama2-13B",
+      "stage": "prefill",
+      "total_cycles": 2108372,
+      "noc_overhead_cycles": 286734,
+      "noc_pct": 13.599782201622864,
+      "dram_access_cycles": 2448992,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.028594830300044803,
+      "extra": {
+        "sram_kb": 8192
+      }
+    },
+    {
+      "experiment": "G_sram",
+      "label": "8192KB_decode",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "sram_kb": 8192
+      }
+    },
+    {
+      "experiment": "H_energy_dram",
+      "label": "4TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1747952,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.25710088148873655,
+      "dram_access_cycles": 7409472,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0229135498000007,
+      "extra": {
+        "dram_bw_tbps": 4
+      }
+    },
+    {
+      "experiment": "H_energy_dram",
+      "label": "8TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1284860,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3497657332316361,
+      "dram_access_cycles": 3704736,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.017205940900000702,
+      "extra": {
+        "dram_bw_tbps": 8
+      }
+    },
+    {
+      "experiment": "H_energy_dram",
+      "label": "12TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1130496,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.3975246263586957,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.015303404600000702,
+      "extra": {
+        "dram_bw_tbps": 12
+      }
+    },
+    {
+      "experiment": "H_energy_dram",
+      "label": "16TBs",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1053313,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.4266538056589067,
+      "dram_access_cycles": 1852360,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.014352124125000702,
+      "extra": {
+        "dram_bw_tbps": 16
+      }
+    },
+    {
+      "experiment": "H_energy_cores",
+      "label": "cores_64",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1132422,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.39684852466659953,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0272159846000007,
+      "extra": {
+        "num_cores": 64
+      }
+    },
+    {
+      "experiment": "H_energy_cores",
+      "label": "cores_256",
+      "model": "Llama2-13B",
+      "stage": "decode",
+      "total_cycles": 1132422,
+      "noc_overhead_cycles": 4494,
+      "noc_pct": 0.39684852466659953,
+      "dram_access_cycles": 2469824,
+      "row_conflict_overhead_cycles": 0,
+      "energy_joules": 0.0747777086000007,
+      "extra": {
+        "num_cores": 256
+      }
+    }
+  ],
+  "verdicts": [
+    {
+      "id": "A_shift_noc_vs_spmd",
+      "paper": "Compute-shift lower NoC overhead than SPMD",
+      "paper_value": "SPMD up to 49% NoC",
+      "simulator": "SPMD noc=13.7%, shift=13.6%",
+      "verdict": "PARTIAL"
+    },
+    {
+      "id": "A_dataflow_vs_spmd",
+      "paper": "Dataflow faster than SPMD ~35.7%",
+      "paper_value": "~35.7% faster",
+      "simulator": "-1117.4% relative to SPMD",
+      "verdict": "PARTIAL"
+    },
+    {
+      "id": "A_shift_vs_spmd",
+      "paper": "Compute-shift faster than SPMD ~46.7%",
+      "paper_value": "~46.7% faster",
+      "simulator": "-0.8% relative to SPMD",
+      "verdict": "PARTIAL"
+    },
+    {
+      "id": "B_dim_vs_seq_mesh",
+      "paper": "Dimension-ordered up to 46% faster on mesh (prefill)",
+      "paper_value": "~46%",
+      "simulator": "seq=2108372, dim=2108372",
+      "verdict": "PASS"
+    },
+    {
+      "id": "C_sw_vs_uniform",
+      "paper": "Software-aware reduces row conflict ~80.7%",
+      "paper_value": "~80.7%",
+      "simulator": "uniform=0, sw=0",
+      "verdict": "PASS"
+    },
+    {
+      "id": "D_noc_bw_prefill",
+      "paper": "Higher NoC link BW improves prefill",
+      "paper_value": "plateau at 32 B/cycle",
+      "simulator": "link_4B=3255252, link_8B=2599892, link_16B=2272212, link_32B=2108372",
+      "verdict": "PASS"
+    },
+    {
+      "id": "E_dram_bw_decode",
+      "paper": "Decode improves with DRAM bandwidth",
+      "paper_value": "monotonic trend",
+      "simulator": "4TBs=1747952, 8TBs=1284860, 12TBs=1130496, 16TBs=1053313",
+      "verdict": "PASS"
+    },
+    {
+      "id": "F_core_group",
+      "paper": "Larger core group reduces row conflicts",
+      "paper_value": "group=8 up to +57%",
+      "simulator": "g1=0, g2=0, g4=0, g8=0, g16=0",
+      "verdict": "PASS"
+    },
+    {
+      "id": "G_sram_decode",
+      "paper": "Decode benefits from larger SRAM",
+      "paper_value": "8MB saturates DRAM BW",
+      "simulator": "512KB_decode=1138176, 2048KB_decode=1130496, 8192KB_decode=1130496",
+      "verdict": "PASS"
+    },
+    {
+      "id": "H_energy_dram",
+      "paper": "Higher DRAM BW improves decode energy efficiency",
+      "paper_value": "lower energy per token",
+      "simulator": "4TBs=0.0229J, 8TBs=0.0172J, 12TBs=0.0153J, 16TBs=0.0144J",
+      "verdict": "PASS"
+    }
+  ]
+}

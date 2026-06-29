@@ -536,6 +536,23 @@ configs/experiments/
 
 ---
 
+## 16. 复现报告
+
+运行批量实验并生成论文对照报告：
+
+```bash
+python scripts/run_reproduction.py --quick
+# 完整 Table 2/3 规模（耗时数小时）：
+python scripts/run_reproduction.py --full
+```
+
+输出：
+
+- [`docs/voxel-reproduction-report.md`](voxel-reproduction-report.md) — PASS/PARTIAL/FAIL 趋势核对
+- [`docs/reproduction-results.json`](reproduction-results.json) — 原始 JSON 数据
+
+---
+
 ## 15. 参考文献
 
 - 论文：arXiv:2604.26821v1

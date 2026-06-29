@@ -53,9 +53,9 @@ class MappingPlanner:
         strategy = self.config.tensor_to_bank_mapping
 
         if strategy == TensorToBankMapping.UNIFORM:
-            banks_per = max(1, num_banks // max(1, len(concurrent_tensors or [tensor.name])))
-            start = (tensor_index * banks_per) % num_banks
-            return [(start + i) % num_banks for i in range(banks_per)]
+            # All tensors share the same bank subset -> high row conflicts.
+            banks_used = max(1, min(8, num_banks // 4))
+            return list(range(banks_used))
 
         if strategy == TensorToBankMapping.INTERLEAVE_SIZE:
             # Heuristic: consecutive tensors to disjoint banks, sized by tensor volume
