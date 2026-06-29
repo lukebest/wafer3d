@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T04:05:32.168540+00:00",
+  "generated_at": "2026-06-29T05:19:59.119713+00:00",
   "quick_mode": true,
   "models": [
     "Llama2-13B"
@@ -10,12 +10,12 @@
       "label": "spmd",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 18307024,
+      "total_cycles": 18149328,
       "noc_overhead_cycles": 16057104,
-      "noc_pct": 87.71007237440668,
-      "dram_access_cycles": 4734464,
+      "noc_pct": 88.47216822573266,
+      "dram_access_cycles": 3630592,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.21511501760250892,
+      "energy_joules": 0.21318767680250894,
       "extra": {}
     },
     {
@@ -23,12 +23,12 @@
       "label": "spmd",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1682384,
+      "total_cycles": 1379984,
       "noc_overhead_cycles": 251664,
-      "noc_pct": 14.958772789089767,
-      "dram_access_cycles": 4589760,
+      "noc_pct": 18.236733179515124,
+      "dram_access_cycles": 2472960,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.021868735000039323,
+      "energy_joules": 0.018172840000039322,
       "extra": {}
     },
     {
@@ -36,12 +36,12 @@
       "label": "dataflow",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2925793,
+      "total_cycles": 2768097,
       "noc_overhead_cycles": 1351746,
-      "noc_pct": 46.201012853609264,
-      "dram_access_cycles": 4734464,
+      "noc_pct": 48.83304306171352,
+      "dram_access_cycles": 3630592,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.03823086110021121,
+      "energy_joules": 0.03630352030021121,
       "extra": {}
     },
     {
@@ -49,12 +49,12 @@
       "label": "dataflow",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1441313,
+      "total_cycles": 1138913,
       "noc_overhead_cycles": 21186,
-      "noc_pct": 1.4699097281437135,
-      "dram_access_cycles": 4589760,
+      "noc_pct": 1.8601947646571775,
+      "dram_access_cycles": 2472960,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.01909641850000331,
+      "energy_joules": 0.01540052350000331,
       "extra": {}
     },
     {
@@ -65,9 +65,9 @@
       "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
       "noc_pct": 12.274887197445139,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0314475516000448,
+      "energy_joules": 0.0313499772000448,
       "extra": {}
     },
     {
@@ -78,9 +78,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {}
     },
     {
@@ -91,9 +91,9 @@
       "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
       "noc_pct": 12.274887197445139,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0314475516000448,
+      "energy_joules": 0.0313499772000448,
       "extra": {
         "mapping": "sequential",
         "topology": "mesh_2d"
@@ -107,9 +107,9 @@
       "total_cycles": 2311363,
       "noc_overhead_cycles": 204810,
       "noc_pct": 8.861005389460678,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.031164916100032,
+      "energy_joules": 0.031067341700032,
       "extra": {
         "mapping": "sequential",
         "topology": "torus_2d"
@@ -123,9 +123,9 @@
       "total_cycles": 2249920,
       "noc_overhead_cycles": 0,
       "noc_pct": 0.0,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0304583216,
+      "energy_joules": 0.030360747200000003,
       "extra": {
         "mapping": "sequential",
         "topology": "all_to_all"
@@ -139,9 +139,9 @@
       "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
       "noc_pct": 12.274887197445139,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0314475516000448,
+      "energy_joules": 0.0313499772000448,
       "extra": {
         "mapping": "dimension_ordered",
         "topology": "mesh_2d"
@@ -155,9 +155,9 @@
       "total_cycles": 2311363,
       "noc_overhead_cycles": 204810,
       "noc_pct": 8.861005389460678,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.031164916100032,
+      "energy_joules": 0.031067341700032,
       "extra": {
         "mapping": "dimension_ordered",
         "topology": "torus_2d"
@@ -171,9 +171,9 @@
       "total_cycles": 2249920,
       "noc_overhead_cycles": 0,
       "noc_pct": 0.0,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0304583216,
+      "energy_joules": 0.030360747200000003,
       "extra": {
         "mapping": "dimension_ordered",
         "topology": "all_to_all"
@@ -184,12 +184,12 @@
       "label": "uniform",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 894300,
+      "total_cycles": 894384,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.5025159342502515,
-      "dram_access_cycles": 557800,
+      "noc_pct": 0.5024687382600762,
+      "dram_access_cycles": 558384,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.012389973125000701,
+      "energy_joules": 0.012390999350000702,
       "extra": {
         "mapping": "uniform"
       }
@@ -199,12 +199,12 @@
       "label": "interleave_size",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1752738,
+      "total_cycles": 1755048,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.25639884569171206,
-      "dram_access_cycles": 7443842,
+      "noc_pct": 0.2560613726804053,
+      "dram_access_cycles": 7451472,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.022972133206250703,
+      "energy_joules": 0.022999485050000705,
       "extra": {
         "mapping": "interleave_size"
       }
@@ -217,9 +217,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "mapping": "software_aware"
       }
@@ -232,9 +232,9 @@
       "total_cycles": 2938052,
       "noc_overhead_cycles": 2293774,
       "noc_pct": 78.07125265311846,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0383718396003584,
+      "energy_joules": 0.038274265200358405,
       "extra": {
         "link_bw": 4
       }
@@ -247,9 +247,9 @@
       "total_cycles": 2593988,
       "noc_overhead_cycles": 1146894,
       "noc_pct": 44.21354300790906,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0344151036001792,
+      "energy_joules": 0.034317529200179206,
       "extra": {
         "link_bw": 8
       }
@@ -262,9 +262,9 @@
       "total_cycles": 2421956,
       "noc_overhead_cycles": 573454,
       "noc_pct": 23.6773087537511,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.032436735600089604,
+      "energy_joules": 0.0323391612000896,
       "extra": {
         "link_bw": 16
       }
@@ -277,9 +277,9 @@
       "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
       "noc_pct": 12.274887197445139,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0314475516000448,
+      "energy_joules": 0.0313499772000448,
       "extra": {
         "link_bw": 32
       }
@@ -292,9 +292,9 @@
       "total_cycles": 2655108,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.1692586516254706,
-      "dram_access_cycles": 13769280,
+      "dram_access_cycles": 8326080,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.034001699000000704,
+      "energy_joules": 0.033440369000000705,
       "extra": {
         "dram_bw_tbps": 4
       }
@@ -307,9 +307,9 @@
       "total_cycles": 1737828,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.2585986645398739,
-      "dram_access_cycles": 6884640,
+      "dram_access_cycles": 4163040,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.022743000500000703,
+      "energy_joules": 0.022462335500000704,
       "extra": {
         "dram_bw_tbps": 8
       }
@@ -322,9 +322,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "dram_bw_tbps": 12
       }
@@ -337,9 +337,9 @@
       "total_cycles": 1279188,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.3513166164785786,
-      "dram_access_cycles": 3442318,
+      "dram_access_cycles": 2081506,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0171136510437507,
+      "energy_joules": 0.016973317306250704,
       "extra": {
         "dram_bw_tbps": 16
       }
@@ -352,9 +352,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "core_group": 1
       }
@@ -367,9 +367,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "core_group": 2
       }
@@ -382,9 +382,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "core_group": 4
       }
@@ -397,9 +397,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "core_group": 8
       }
@@ -412,9 +412,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "core_group": 16
       }
@@ -427,9 +427,9 @@
       "total_cycles": 2593988,
       "noc_overhead_cycles": 1146894,
       "noc_pct": 44.21354300790906,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0344151036001792,
+      "energy_joules": 0.034317529200179206,
       "extra": {
         "sram_kb": 512
       }
@@ -442,9 +442,9 @@
       "total_cycles": 1436100,
       "noc_overhead_cycles": 17934,
       "noc_pct": 1.2487988301650303,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.019036469000002804,
+      "energy_joules": 0.018849359000002803,
       "extra": {
         "sram_kb": 512
       }
@@ -457,9 +457,9 @@
       "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
       "noc_pct": 12.274887197445139,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0314475516000448,
+      "energy_joules": 0.0313499772000448,
       "extra": {
         "sram_kb": 2048
       }
@@ -472,9 +472,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "sram_kb": 2048
       }
@@ -487,9 +487,9 @@
       "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
       "noc_pct": 12.274887197445139,
-      "dram_access_cycles": 4734464,
+      "dram_access_cycles": 3788288,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0314475516000448,
+      "energy_joules": 0.0313499772000448,
       "extra": {
         "sram_kb": 8192
       }
@@ -502,9 +502,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "sram_kb": 8192
       }
@@ -517,9 +517,9 @@
       "total_cycles": 2655108,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.1692586516254706,
-      "dram_access_cycles": 13769280,
+      "dram_access_cycles": 8326080,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.034001699000000704,
+      "energy_joules": 0.033440369000000705,
       "extra": {
         "dram_bw_tbps": 4
       }
@@ -532,9 +532,9 @@
       "total_cycles": 1737828,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.2585986645398739,
-      "dram_access_cycles": 6884640,
+      "dram_access_cycles": 4163040,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.022743000500000703,
+      "energy_joules": 0.022462335500000704,
       "extra": {
         "dram_bw_tbps": 8
       }
@@ -547,9 +547,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018990101000000703,
+      "energy_joules": 0.018802991000000702,
       "extra": {
         "dram_bw_tbps": 12
       }
@@ -562,9 +562,9 @@
       "total_cycles": 1279188,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.3513166164785786,
-      "dram_access_cycles": 3442318,
+      "dram_access_cycles": 2081506,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0171136510437507,
+      "energy_joules": 0.016973317306250704,
       "extra": {
         "dram_bw_tbps": 16
       }
@@ -577,9 +577,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0340268150000007,
+      "energy_joules": 0.0338397050000007,
       "extra": {
         "num_cores": 64
       }
@@ -592,9 +592,9 @@
       "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
       "noc_pct": 0.313811913959393,
-      "dram_access_cycles": 4589760,
+      "dram_access_cycles": 2775360,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0941736710000007,
+      "energy_joules": 0.0939865610000007,
       "extra": {
         "num_cores": 256
       }
@@ -605,21 +605,21 @@
       "id": "A_shift_noc_vs_spmd",
       "paper": "Compute-shift lower NoC overhead than SPMD",
       "paper_value": "SPMD up to 49% NoC",
-      "simulator": "SPMD noc=87.7%, shift=12.3%",
+      "simulator": "SPMD noc=88.5%, shift=12.3%",
       "verdict": "PASS"
     },
     {
       "id": "A_dataflow_vs_spmd",
       "paper": "Dataflow faster than SPMD ~35.7%",
       "paper_value": "~35.7% faster",
-      "simulator": "84.0% relative to SPMD",
+      "simulator": "84.7% relative to SPMD",
       "verdict": "PASS"
     },
     {
       "id": "A_shift_vs_spmd",
       "paper": "Compute-shift faster than SPMD ~46.7%",
       "paper_value": "~46.7% faster",
-      "simulator": "87.2% relative to SPMD",
+      "simulator": "87.1% relative to SPMD",
       "verdict": "PASS"
     },
     {
@@ -668,7 +668,7 @@
       "id": "H_energy_dram",
       "paper": "Higher DRAM BW improves decode energy efficiency",
       "paper_value": "lower energy per token",
-      "simulator": "4TBs=0.0340J, 8TBs=0.0227J, 12TBs=0.0190J, 16TBs=0.0171J",
+      "simulator": "4TBs=0.0334J, 8TBs=0.0225J, 12TBs=0.0188J, 16TBs=0.0170J",
       "verdict": "PASS"
     }
   ]

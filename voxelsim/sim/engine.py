@@ -119,10 +119,17 @@ class SimulationEngine:
             if ev.kind != EventKind.COMPUTE or ev.op_tile is None:
                 continue
             names = concurrent.get(ev.event_id, [])
-            for i, t in enumerate(ev.op_tile.inputs + ev.op_tile.outputs):
+            ev_tensors = ev.op_tile.inputs + ev.op_tile.outputs
+            name_to_bank = {t.name: t.bank_id for t in ev_tensors}
+            bank_ids = [name_to_bank.get(n) for n in names]
+            for i, t in enumerate(ev_tensors):
                 if t.name not in tensor_banks:
                     tensor_banks[t.name] = planner.map_tensor_to_banks(
-                        t, num_banks, concurrent_tensors=names, tensor_index=i
+                        t,
+                        num_banks,
+                        concurrent_tensors=names,
+                        tensor_index=i,
+                        concurrent_bank_ids=bank_ids,
                     )
 
         for ev in graph.copy_events():

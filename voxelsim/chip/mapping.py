@@ -49,6 +49,7 @@ class MappingPlanner:
         *,
         concurrent_tensors: list[str] | None = None,
         tensor_index: int = 0,
+        concurrent_bank_ids: list[int | None] | None = None,
     ) -> list[int]:
         strategy = self.config.tensor_to_bank_mapping
 
@@ -64,13 +65,34 @@ class MappingPlanner:
             start = (tensor_index * banks_needed) % num_banks
             return [(start + i) % num_banks for i in range(banks_needed)]
 
-        # Software-aware: anchor the bank spread at the builder's explicit
-        # bank_id when present, so the paradigm builder's placement intent is
-        # respected rather than overridden by the planner's index-based mapping.
+        # Software-aware: place concurrent tensors on DISJOINT bank chunks. The
+        # chunk for each tensor is chosen by the RANK of its explicit bank_id
+        # among the concurrent set, so the paradigm builder's relative placement
+        # intent is honored without the overlaps that arise from spreading each
+        # tensor at its raw bank_id (e.g. bank_id 0 and 1 with chunk>1).
         if concurrent_tensors:
-            idx = concurrent_tensors.index(tensor.name) if tensor.name in concurrent_tensors else tensor_index
             chunk = max(1, num_banks // len(concurrent_tensors))
-            base = tensor.bank_id if tensor.bank_id is not None else idx * chunk
+            if (
+                concurrent_bank_ids is not None
+                and tensor.name in concurrent_tensors
+            ):
+                pos = concurrent_tensors.index(tensor.name)
+                order = sorted(
+                    range(len(concurrent_tensors)),
+                    key=lambda k: (
+                        concurrent_bank_ids[k] is None,
+                        concurrent_bank_ids[k] or 0,
+                    ),
+                )
+                rank = order.index(pos)
+                base = rank * chunk
+            else:
+                idx = (
+                    concurrent_tensors.index(tensor.name)
+                    if tensor.name in concurrent_tensors
+                    else tensor_index
+                )
+                base = tensor.bank_id if tensor.bank_id is not None else idx * chunk
             return [(base + i) % num_banks for i in range(chunk)]
         base = tensor.bank_id if tensor.bank_id is not None else tensor_index
         return [base % num_banks]
@@ -95,8 +117,15 @@ class MappingPlanner:
         if ev.op_tile is None:
             return result
         names = concurrent.get(ev.event_id, [])
-        for i, t in enumerate(ev.op_tile.inputs + ev.op_tile.outputs):
+        ev_tensors = ev.op_tile.inputs + ev.op_tile.outputs
+        name_to_bank = {t.name: t.bank_id for t in ev_tensors}
+        bank_ids = [name_to_bank.get(n) for n in names]
+        for i, t in enumerate(ev_tensors):
             result[t.name] = self.map_tensor_to_banks(
-                t, num_banks, concurrent_tensors=names, tensor_index=i
+                t,
+                num_banks,
+                concurrent_tensors=names,
+                tensor_index=i,
+                concurrent_bank_ids=bank_ids,
             )
         return result
