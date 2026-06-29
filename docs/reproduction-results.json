@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T03:36:48.095085+00:00",
+  "generated_at": "2026-06-29T04:05:32.168540+00:00",
   "quick_mode": true,
   "models": [
     "Llama2-13B"
@@ -10,12 +10,12 @@
       "label": "spmd",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 18149328,
+      "total_cycles": 18307024,
       "noc_overhead_cycles": 16057104,
-      "noc_pct": 88.47216822573266,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 87.71007237440668,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.21318767680250894,
+      "energy_joules": 0.21511501760250892,
       "extra": {}
     },
     {
@@ -23,12 +23,12 @@
       "label": "spmd",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1379984,
+      "total_cycles": 1682384,
       "noc_overhead_cycles": 251664,
-      "noc_pct": 18.236733179515124,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 14.958772789089767,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.018172840000039322,
+      "energy_joules": 0.021868735000039323,
       "extra": {}
     },
     {
@@ -36,12 +36,12 @@
       "label": "dataflow",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2768097,
+      "total_cycles": 2925793,
       "noc_overhead_cycles": 1351746,
-      "noc_pct": 48.83304306171352,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 46.201012853609264,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.03630352030021121,
+      "energy_joules": 0.03823086110021121,
       "extra": {}
     },
     {
@@ -49,12 +49,12 @@
       "label": "dataflow",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1138913,
+      "total_cycles": 1441313,
       "noc_overhead_cycles": 21186,
-      "noc_pct": 1.8601947646571775,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 1.4699097281437135,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.01540052350000331,
+      "energy_joules": 0.01909641850000331,
       "extra": {}
     },
     {
@@ -62,12 +62,12 @@
       "label": "compute_shift",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2178244,
+      "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
-      "noc_pct": 13.163539070921347,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 12.274887197445139,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029520210800044803,
+      "energy_joules": 0.0314475516000448,
       "extra": {}
     },
     {
@@ -75,12 +75,12 @@
       "label": "compute_shift",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {}
     },
     {
@@ -88,12 +88,12 @@
       "label": "sequential_mesh_2d",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2178244,
+      "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
-      "noc_pct": 13.163539070921347,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 12.274887197445139,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029520210800044803,
+      "energy_joules": 0.0314475516000448,
       "extra": {
         "mapping": "sequential",
         "topology": "mesh_2d"
@@ -104,12 +104,12 @@
       "label": "sequential_torus_2d",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2153667,
+      "total_cycles": 2311363,
       "noc_overhead_cycles": 204810,
-      "noc_pct": 9.50982672808749,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 8.861005389460678,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029237575300032004,
+      "energy_joules": 0.031164916100032,
       "extra": {
         "mapping": "sequential",
         "topology": "torus_2d"
@@ -120,12 +120,12 @@
       "label": "sequential_all_to_all",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2092224,
+      "total_cycles": 2249920,
       "noc_overhead_cycles": 0,
       "noc_pct": 0.0,
-      "dram_access_cycles": 3630592,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0285309808,
+      "energy_joules": 0.0304583216,
       "extra": {
         "mapping": "sequential",
         "topology": "all_to_all"
@@ -136,12 +136,12 @@
       "label": "dimension_ordered_mesh_2d",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2178244,
+      "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
-      "noc_pct": 13.163539070921347,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 12.274887197445139,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029520210800044803,
+      "energy_joules": 0.0314475516000448,
       "extra": {
         "mapping": "dimension_ordered",
         "topology": "mesh_2d"
@@ -152,12 +152,12 @@
       "label": "dimension_ordered_torus_2d",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2153667,
+      "total_cycles": 2311363,
       "noc_overhead_cycles": 204810,
-      "noc_pct": 9.50982672808749,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 8.861005389460678,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029237575300032004,
+      "energy_joules": 0.031164916100032,
       "extra": {
         "mapping": "dimension_ordered",
         "topology": "torus_2d"
@@ -168,12 +168,12 @@
       "label": "dimension_ordered_all_to_all",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2092224,
+      "total_cycles": 2249920,
       "noc_overhead_cycles": 0,
       "noc_pct": 0.0,
-      "dram_access_cycles": 3630592,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0285309808,
+      "energy_joules": 0.0304583216,
       "extra": {
         "mapping": "dimension_ordered",
         "topology": "all_to_all"
@@ -184,12 +184,12 @@
       "label": "uniform",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 894356,
+      "total_cycles": 894300,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.5024844692717442,
-      "dram_access_cycles": 557352,
+      "noc_pct": 0.5025159342502515,
+      "dram_access_cycles": 557800,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.012390570925000703,
+      "energy_joules": 0.012389973125000701,
       "extra": {
         "mapping": "uniform"
       }
@@ -199,12 +199,12 @@
       "label": "interleave_size",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1755076,
+      "total_cycles": 1752738,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.25605728754766177,
-      "dram_access_cycles": 7449540,
+      "noc_pct": 0.25639884569171206,
+      "dram_access_cycles": 7443842,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0229996078125007,
+      "energy_joules": 0.022972133206250703,
       "extra": {
         "mapping": "interleave_size"
       }
@@ -214,12 +214,12 @@
       "label": "software_aware",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "mapping": "software_aware"
       }
@@ -229,12 +229,12 @@
       "label": "link_4B",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2780356,
+      "total_cycles": 2938052,
       "noc_overhead_cycles": 2293774,
-      "noc_pct": 82.49929145764068,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 78.07125265311846,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0364444988003584,
+      "energy_joules": 0.0383718396003584,
       "extra": {
         "link_bw": 4
       }
@@ -244,12 +244,12 @@
       "label": "link_8B",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2436292,
+      "total_cycles": 2593988,
       "noc_overhead_cycles": 1146894,
-      "noc_pct": 47.075391619723746,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 44.21354300790906,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.032487762800179204,
+      "energy_joules": 0.0344151036001792,
       "extra": {
         "link_bw": 8
       }
@@ -259,12 +259,12 @@
       "label": "link_16B",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2264260,
+      "total_cycles": 2421956,
       "noc_overhead_cycles": 573454,
-      "noc_pct": 25.326331781685848,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 23.6773087537511,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0305093948000896,
+      "energy_joules": 0.032436735600089604,
       "extra": {
         "link_bw": 16
       }
@@ -274,12 +274,12 @@
       "label": "link_32B",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2178244,
+      "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
-      "noc_pct": 13.163539070921347,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 12.274887197445139,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029520210800044803,
+      "energy_joules": 0.0314475516000448,
       "extra": {
         "link_bw": 32
       }
@@ -289,12 +289,12 @@
       "label": "4TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1747908,
+      "total_cycles": 2655108,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.2571073534762699,
-      "dram_access_cycles": 7418880,
+      "noc_pct": 0.1692586516254706,
+      "dram_access_cycles": 13769280,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.022914014000000704,
+      "energy_joules": 0.034001699000000704,
       "extra": {
         "dram_bw_tbps": 4
       }
@@ -304,12 +304,12 @@
       "label": "8TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1284228,
+      "total_cycles": 1737828,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.34993786150122874,
-      "dram_access_cycles": 3709440,
+      "noc_pct": 0.2585986645398739,
+      "dram_access_cycles": 6884640,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.017199158000000703,
+      "energy_joules": 0.022743000500000703,
       "extra": {
         "dram_bw_tbps": 8
       }
@@ -319,12 +319,12 @@
       "label": "12TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "dram_bw_tbps": 12
       }
@@ -334,12 +334,12 @@
       "label": "16TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1052386,
+      "total_cycles": 1279188,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.42702962601174854,
-      "dram_access_cycles": 1854704,
+      "noc_pct": 0.3513166164785786,
+      "dram_access_cycles": 3442318,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.014341705350000702,
+      "energy_joules": 0.0171136510437507,
       "extra": {
         "dram_bw_tbps": 16
       }
@@ -349,12 +349,12 @@
       "label": "group_1",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "core_group": 1
       }
@@ -364,12 +364,12 @@
       "label": "group_2",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "core_group": 2
       }
@@ -379,12 +379,12 @@
       "label": "group_4",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "core_group": 4
       }
@@ -394,12 +394,12 @@
       "label": "group_8",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "core_group": 8
       }
@@ -409,12 +409,12 @@
       "label": "group_16",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "core_group": 16
       }
@@ -424,12 +424,12 @@
       "label": "512KB_prefill",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2436292,
+      "total_cycles": 2593988,
       "noc_overhead_cycles": 1146894,
-      "noc_pct": 47.075391619723746,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 44.21354300790906,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.032487762800179204,
+      "energy_joules": 0.0344151036001792,
       "extra": {
         "sram_kb": 512
       }
@@ -439,12 +439,12 @@
       "label": "512KB_decode",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1133700,
+      "total_cycles": 1436100,
       "noc_overhead_cycles": 17934,
-      "noc_pct": 1.581899973537973,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 1.2487988301650303,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015340574000002802,
+      "energy_joules": 0.019036469000002804,
       "extra": {
         "sram_kb": 512
       }
@@ -454,12 +454,12 @@
       "label": "2048KB_prefill",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2178244,
+      "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
-      "noc_pct": 13.163539070921347,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 12.274887197445139,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029520210800044803,
+      "energy_joules": 0.0314475516000448,
       "extra": {
         "sram_kb": 2048
       }
@@ -469,12 +469,12 @@
       "label": "2048KB_decode",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "sram_kb": 2048
       }
@@ -484,12 +484,12 @@
       "label": "8192KB_prefill",
       "model": "Llama2-13B",
       "stage": "prefill",
-      "total_cycles": 2178244,
+      "total_cycles": 2335940,
       "noc_overhead_cycles": 286734,
-      "noc_pct": 13.163539070921347,
-      "dram_access_cycles": 3630592,
+      "noc_pct": 12.274887197445139,
+      "dram_access_cycles": 4734464,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.029520210800044803,
+      "energy_joules": 0.0314475516000448,
       "extra": {
         "sram_kb": 8192
       }
@@ -499,12 +499,12 @@
       "label": "8192KB_decode",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "sram_kb": 8192
       }
@@ -514,12 +514,12 @@
       "label": "4TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1747908,
+      "total_cycles": 2655108,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.2571073534762699,
-      "dram_access_cycles": 7418880,
+      "noc_pct": 0.1692586516254706,
+      "dram_access_cycles": 13769280,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.022914014000000704,
+      "energy_joules": 0.034001699000000704,
       "extra": {
         "dram_bw_tbps": 4
       }
@@ -529,12 +529,12 @@
       "label": "8TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1284228,
+      "total_cycles": 1737828,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.34993786150122874,
-      "dram_access_cycles": 3709440,
+      "noc_pct": 0.2585986645398739,
+      "dram_access_cycles": 6884640,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.017199158000000703,
+      "energy_joules": 0.022743000500000703,
       "extra": {
         "dram_bw_tbps": 8
       }
@@ -544,12 +544,12 @@
       "label": "12TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.015294206000000702,
+      "energy_joules": 0.018990101000000703,
       "extra": {
         "dram_bw_tbps": 12
       }
@@ -559,12 +559,12 @@
       "label": "16TBs",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1052386,
+      "total_cycles": 1279188,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.42702962601174854,
-      "dram_access_cycles": 1854704,
+      "noc_pct": 0.3513166164785786,
+      "dram_access_cycles": 3442318,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.014341705350000702,
+      "energy_joules": 0.0171136510437507,
       "extra": {
         "dram_bw_tbps": 16
       }
@@ -574,12 +574,12 @@
       "label": "cores_64",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.027155720000000702,
+      "energy_joules": 0.0340268150000007,
       "extra": {
         "num_cores": 64
       }
@@ -589,12 +589,12 @@
       "label": "cores_256",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1129668,
+      "total_cycles": 1432068,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.3978159954960218,
-      "dram_access_cycles": 2472960,
+      "noc_pct": 0.313811913959393,
+      "dram_access_cycles": 4589760,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.0746017760000007,
+      "energy_joules": 0.0941736710000007,
       "extra": {
         "num_cores": 256
       }
@@ -605,28 +605,28 @@
       "id": "A_shift_noc_vs_spmd",
       "paper": "Compute-shift lower NoC overhead than SPMD",
       "paper_value": "SPMD up to 49% NoC",
-      "simulator": "SPMD noc=88.5%, shift=13.2%",
+      "simulator": "SPMD noc=87.7%, shift=12.3%",
       "verdict": "PASS"
     },
     {
       "id": "A_dataflow_vs_spmd",
       "paper": "Dataflow faster than SPMD ~35.7%",
       "paper_value": "~35.7% faster",
-      "simulator": "84.7% relative to SPMD",
+      "simulator": "84.0% relative to SPMD",
       "verdict": "PASS"
     },
     {
       "id": "A_shift_vs_spmd",
       "paper": "Compute-shift faster than SPMD ~46.7%",
       "paper_value": "~46.7% faster",
-      "simulator": "88.0% relative to SPMD",
+      "simulator": "87.2% relative to SPMD",
       "verdict": "PASS"
     },
     {
       "id": "B_dim_vs_seq_mesh",
       "paper": "Dimension-ordered up to 46% faster on mesh (prefill)",
       "paper_value": "~46%",
-      "simulator": "seq=2178244, dim=2178244",
+      "simulator": "seq=2335940, dim=2335940",
       "verdict": "PASS"
     },
     {
@@ -640,14 +640,14 @@
       "id": "D_noc_bw_prefill",
       "paper": "Higher NoC link BW improves prefill",
       "paper_value": "plateau at 32 B/cycle",
-      "simulator": "link_4B=2780356, link_8B=2436292, link_16B=2264260, link_32B=2178244",
+      "simulator": "link_4B=2938052, link_8B=2593988, link_16B=2421956, link_32B=2335940",
       "verdict": "PASS"
     },
     {
       "id": "E_dram_bw_decode",
       "paper": "Decode improves with DRAM bandwidth",
       "paper_value": "monotonic trend",
-      "simulator": "4TBs=1747908, 8TBs=1284228, 12TBs=1129668, 16TBs=1052386",
+      "simulator": "4TBs=2655108, 8TBs=1737828, 12TBs=1432068, 16TBs=1279188",
       "verdict": "PASS"
     },
     {
@@ -661,14 +661,14 @@
       "id": "G_sram_decode",
       "paper": "Decode benefits from larger SRAM",
       "paper_value": "8MB saturates DRAM BW",
-      "simulator": "512KB_decode=1133700, 2048KB_decode=1129668, 8192KB_decode=1129668",
+      "simulator": "512KB_decode=1436100, 2048KB_decode=1432068, 8192KB_decode=1432068",
       "verdict": "PASS"
     },
     {
       "id": "H_energy_dram",
       "paper": "Higher DRAM BW improves decode energy efficiency",
       "paper_value": "lower energy per token",
-      "simulator": "4TBs=0.0229J, 8TBs=0.0172J, 12TBs=0.0153J, 16TBs=0.0143J",
+      "simulator": "4TBs=0.0340J, 8TBs=0.0227J, 12TBs=0.0190J, 16TBs=0.0171J",
       "verdict": "PASS"
     }
   ]

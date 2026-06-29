@@ -1,6 +1,6 @@
 # Voxel 论文实验复现报告
 
-> 生成时间：2026-06-29 03:36 UTC  
+> 生成时间：2026-06-29 04:05 UTC  
 > 配置：quick (16 cores, batch=4, seq=128)  
 > 模型：Llama2-13B
 
@@ -17,16 +17,16 @@
 
 | ID | 论文结论 | 论文参考值 | Simulator 结果 | 判定 |
 |----|----------|------------|----------------|------|
-| A_shift_noc_vs_spmd | Compute-shift lower NoC overhead than SPMD | SPMD up to 49% NoC | SPMD noc=88.5%, shift=13.2% | **PASS** |
-| A_dataflow_vs_spmd | Dataflow faster than SPMD ~35.7% | ~35.7% faster | 84.7% relative to SPMD | **PASS** |
-| A_shift_vs_spmd | Compute-shift faster than SPMD ~46.7% | ~46.7% faster | 88.0% relative to SPMD | **PASS** |
-| B_dim_vs_seq_mesh | Dimension-ordered up to 46% faster on mesh (prefill) | ~46% | seq=2178244, dim=2178244 | **PASS** |
+| A_shift_noc_vs_spmd | Compute-shift lower NoC overhead than SPMD | SPMD up to 49% NoC | SPMD noc=87.7%, shift=12.3% | **PASS** |
+| A_dataflow_vs_spmd | Dataflow faster than SPMD ~35.7% | ~35.7% faster | 84.0% relative to SPMD | **PASS** |
+| A_shift_vs_spmd | Compute-shift faster than SPMD ~46.7% | ~46.7% faster | 87.2% relative to SPMD | **PASS** |
+| B_dim_vs_seq_mesh | Dimension-ordered up to 46% faster on mesh (prefill) | ~46% | seq=2335940, dim=2335940 | **PASS** |
 | C_sw_vs_uniform | Software-aware reduces row conflict ~80.7% | ~80.7% | uniform=0, sw=0 | **PASS** |
-| D_noc_bw_prefill | Higher NoC link BW improves prefill | plateau at 32 B/cycle | link_4B=2780356, link_8B=2436292, link_16B=2264260, link_32B=2178244 | **PASS** |
-| E_dram_bw_decode | Decode improves with DRAM bandwidth | monotonic trend | 4TBs=1747908, 8TBs=1284228, 12TBs=1129668, 16TBs=1052386 | **PASS** |
+| D_noc_bw_prefill | Higher NoC link BW improves prefill | plateau at 32 B/cycle | link_4B=2938052, link_8B=2593988, link_16B=2421956, link_32B=2335940 | **PASS** |
+| E_dram_bw_decode | Decode improves with DRAM bandwidth | monotonic trend | 4TBs=2655108, 8TBs=1737828, 12TBs=1432068, 16TBs=1279188 | **PASS** |
 | F_core_group | Larger core group reduces row conflicts | group=8 up to +57% | g1=0, g2=0, g4=0, g8=0, g16=0 | **PASS** |
-| G_sram_decode | Decode benefits from larger SRAM | 8MB saturates DRAM BW | 512KB_decode=1133700, 2048KB_decode=1129668, 8192KB_decode=1129668 | **PASS** |
-| H_energy_dram | Higher DRAM BW improves decode energy efficiency | lower energy per token | 4TBs=0.0229J, 8TBs=0.0172J, 12TBs=0.0153J, 16TBs=0.0143J | **PASS** |
+| G_sram_decode | Decode benefits from larger SRAM | 8MB saturates DRAM BW | 512KB_decode=1436100, 2048KB_decode=1432068, 8192KB_decode=1432068 | **PASS** |
+| H_energy_dram | Higher DRAM BW improves decode energy efficiency | lower energy per token | 4TBs=0.0340J, 8TBs=0.0227J, 12TBs=0.0190J, 16TBs=0.0171J | **PASS** |
 
 ## 原始实验数据
 
@@ -34,78 +34,78 @@
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| spmd | prefill | 18149328 | 88.5 | 3630592 | 0 | 0.2132 |
-| spmd | decode | 1379984 | 18.2 | 2472960 | 0 | 0.0182 |
-| dataflow | prefill | 2768097 | 48.8 | 3630592 | 0 | 0.0363 |
-| dataflow | decode | 1138913 | 1.9 | 2472960 | 0 | 0.0154 |
-| compute_shift | prefill | 2178244 | 13.2 | 3630592 | 0 | 0.0295 |
-| compute_shift | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
+| spmd | prefill | 18307024 | 87.7 | 4734464 | 0 | 0.2151 |
+| spmd | decode | 1682384 | 15.0 | 4589760 | 0 | 0.0219 |
+| dataflow | prefill | 2925793 | 46.2 | 4734464 | 0 | 0.0382 |
+| dataflow | decode | 1441313 | 1.5 | 4589760 | 0 | 0.0191 |
+| compute_shift | prefill | 2335940 | 12.3 | 4734464 | 0 | 0.0314 |
+| compute_shift | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
 ### B_noc_mapping
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| sequential_mesh_2d | prefill | 2178244 | 13.2 | 3630592 | 0 | 0.0295 |
-| sequential_torus_2d | prefill | 2153667 | 9.5 | 3630592 | 0 | 0.0292 |
-| sequential_all_to_all | prefill | 2092224 | 0.0 | 3630592 | 0 | 0.0285 |
-| dimension_ordered_mesh_2d | prefill | 2178244 | 13.2 | 3630592 | 0 | 0.0295 |
-| dimension_ordered_torus_2d | prefill | 2153667 | 9.5 | 3630592 | 0 | 0.0292 |
-| dimension_ordered_all_to_all | prefill | 2092224 | 0.0 | 3630592 | 0 | 0.0285 |
+| sequential_mesh_2d | prefill | 2335940 | 12.3 | 4734464 | 0 | 0.0314 |
+| sequential_torus_2d | prefill | 2311363 | 8.9 | 4734464 | 0 | 0.0312 |
+| sequential_all_to_all | prefill | 2249920 | 0.0 | 4734464 | 0 | 0.0305 |
+| dimension_ordered_mesh_2d | prefill | 2335940 | 12.3 | 4734464 | 0 | 0.0314 |
+| dimension_ordered_torus_2d | prefill | 2311363 | 8.9 | 4734464 | 0 | 0.0312 |
+| dimension_ordered_all_to_all | prefill | 2249920 | 0.0 | 4734464 | 0 | 0.0305 |
 ### C_tensor_bank
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| uniform | decode | 894356 | 0.5 | 557352 | 0 | 0.0124 |
-| interleave_size | decode | 1755076 | 0.3 | 7449540 | 0 | 0.0230 |
-| software_aware | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
+| uniform | decode | 894300 | 0.5 | 557800 | 0 | 0.0124 |
+| interleave_size | decode | 1752738 | 0.3 | 7443842 | 0 | 0.0230 |
+| software_aware | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
 ### D_noc_bw
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| link_4B | prefill | 2780356 | 82.5 | 3630592 | 0 | 0.0364 |
-| link_8B | prefill | 2436292 | 47.1 | 3630592 | 0 | 0.0325 |
-| link_16B | prefill | 2264260 | 25.3 | 3630592 | 0 | 0.0305 |
-| link_32B | prefill | 2178244 | 13.2 | 3630592 | 0 | 0.0295 |
+| link_4B | prefill | 2938052 | 78.1 | 4734464 | 0 | 0.0384 |
+| link_8B | prefill | 2593988 | 44.2 | 4734464 | 0 | 0.0344 |
+| link_16B | prefill | 2421956 | 23.7 | 4734464 | 0 | 0.0324 |
+| link_32B | prefill | 2335940 | 12.3 | 4734464 | 0 | 0.0314 |
 ### E_dram_bw
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| 4TBs | decode | 1747908 | 0.3 | 7418880 | 0 | 0.0229 |
-| 8TBs | decode | 1284228 | 0.3 | 3709440 | 0 | 0.0172 |
-| 12TBs | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
-| 16TBs | decode | 1052386 | 0.4 | 1854704 | 0 | 0.0143 |
+| 4TBs | decode | 2655108 | 0.2 | 13769280 | 0 | 0.0340 |
+| 8TBs | decode | 1737828 | 0.3 | 6884640 | 0 | 0.0227 |
+| 12TBs | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
+| 16TBs | decode | 1279188 | 0.4 | 3442318 | 0 | 0.0171 |
 ### F_core_group
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| group_1 | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
-| group_2 | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
-| group_4 | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
-| group_8 | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
-| group_16 | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
+| group_1 | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
+| group_2 | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
+| group_4 | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
+| group_8 | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
+| group_16 | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
 ### G_sram
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| 512KB_prefill | prefill | 2436292 | 47.1 | 3630592 | 0 | 0.0325 |
-| 512KB_decode | decode | 1133700 | 1.6 | 2472960 | 0 | 0.0153 |
-| 2048KB_prefill | prefill | 2178244 | 13.2 | 3630592 | 0 | 0.0295 |
-| 2048KB_decode | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
-| 8192KB_prefill | prefill | 2178244 | 13.2 | 3630592 | 0 | 0.0295 |
-| 8192KB_decode | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
+| 512KB_prefill | prefill | 2593988 | 44.2 | 4734464 | 0 | 0.0344 |
+| 512KB_decode | decode | 1436100 | 1.2 | 4589760 | 0 | 0.0190 |
+| 2048KB_prefill | prefill | 2335940 | 12.3 | 4734464 | 0 | 0.0314 |
+| 2048KB_decode | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
+| 8192KB_prefill | prefill | 2335940 | 12.3 | 4734464 | 0 | 0.0314 |
+| 8192KB_decode | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
 ### H_energy_dram
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| 4TBs | decode | 1747908 | 0.3 | 7418880 | 0 | 0.0229 |
-| 8TBs | decode | 1284228 | 0.3 | 3709440 | 0 | 0.0172 |
-| 12TBs | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
-| 16TBs | decode | 1052386 | 0.4 | 1854704 | 0 | 0.0143 |
+| 4TBs | decode | 2655108 | 0.2 | 13769280 | 0 | 0.0340 |
+| 8TBs | decode | 1737828 | 0.3 | 6884640 | 0 | 0.0227 |
+| 12TBs | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0190 |
+| 16TBs | decode | 1279188 | 0.4 | 3442318 | 0 | 0.0171 |
 ### H_energy_cores
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| cores_64 | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0272 |
-| cores_256 | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0746 |
+| cores_64 | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0340 |
+| cores_256 | decode | 1432068 | 0.3 | 4589760 | 0 | 0.0942 |
 
 ## 引擎修复项（本次复现前）
 

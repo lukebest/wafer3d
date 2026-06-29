@@ -64,13 +64,16 @@ class MappingPlanner:
             start = (tensor_index * banks_needed) % num_banks
             return [(start + i) % num_banks for i in range(banks_needed)]
 
-        # Software-aware: caller provides concurrent set; place on disjoint banks
+        # Software-aware: anchor the bank spread at the builder's explicit
+        # bank_id when present, so the paradigm builder's placement intent is
+        # respected rather than overridden by the planner's index-based mapping.
         if concurrent_tensors:
             idx = concurrent_tensors.index(tensor.name) if tensor.name in concurrent_tensors else tensor_index
             chunk = max(1, num_banks // len(concurrent_tensors))
-            start = idx * chunk
-            return list(range(start, min(start + chunk, num_banks)))
-        return [tensor_index % num_banks]
+            base = tensor.bank_id if tensor.bank_id is not None else idx * chunk
+            return [(base + i) % num_banks for i in range(chunk)]
+        base = tensor.bank_id if tensor.bank_id is not None else tensor_index
+        return [base % num_banks]
 
     def detect_concurrent_tensors(self, graph: ExecutionGraph) -> dict[int, list[str]]:
         """Detect concurrent tensor accesses from execution graph (§4.3)."""

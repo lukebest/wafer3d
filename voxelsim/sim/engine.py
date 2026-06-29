@@ -150,6 +150,10 @@ class SimulationEngine:
                     continue
                 if ev.src.location != MemoryLocation.SRAM:
                     continue
+                # SRAM->DRAM writes bypass the NoC (go straight to the DRAM
+                # controller); only core-to-core SRAM->SRAM transfers contend.
+                if ev.dest is not None and ev.dest.location == MemoryLocation.DRAM:
+                    continue
                 src_core = ev.src.core_id if ev.src.core_id is not None else 0
                 dst_core = (
                     ev.dest.core_id
@@ -214,7 +218,11 @@ class SimulationEngine:
         duration = 0
         is_noc = False
 
-        if event.src and event.src.location == MemoryLocation.SRAM:
+        if (
+            event.src
+            and event.src.location == MemoryLocation.SRAM
+            and (event.dest is None or event.dest.location != MemoryLocation.DRAM)
+        ):
             is_noc = True
             noc_lat = self._noc_latencies.get(event.event_id)
             if noc_lat is None:
