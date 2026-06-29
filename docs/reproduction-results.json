@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T03:26:29.383533+00:00",
+  "generated_at": "2026-06-29T03:36:48.095085+00:00",
   "quick_mode": true,
   "models": [
     "Llama2-13B"
@@ -184,12 +184,12 @@
       "label": "uniform",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 894342,
+      "total_cycles": 894356,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.5024923351469572,
-      "dram_access_cycles": 557639,
+      "noc_pct": 0.5024844692717442,
+      "dram_access_cycles": 557352,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.012390439521875704,
+      "energy_joules": 0.012390570925000703,
       "extra": {
         "mapping": "uniform"
       }
@@ -199,12 +199,12 @@
       "label": "interleave_size",
       "model": "Llama2-13B",
       "stage": "decode",
-      "total_cycles": 1755244,
+      "total_cycles": 1755076,
       "noc_overhead_cycles": 4494,
-      "noc_pct": 0.2560327794882079,
-      "dram_access_cycles": 7443842,
+      "noc_pct": 0.25605728754766177,
+      "dram_access_cycles": 7449540,
       "row_conflict_overhead_cycles": 0,
-      "energy_joules": 0.023000952206250702,
+      "energy_joules": 0.0229996078125007,
       "extra": {
         "mapping": "interleave_size"
       }

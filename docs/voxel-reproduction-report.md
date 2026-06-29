@@ -1,6 +1,6 @@
 # Voxel 论文实验复现报告
 
-> 生成时间：2026-06-29 03:26 UTC  
+> 生成时间：2026-06-29 03:36 UTC  
 > 配置：quick (16 cores, batch=4, seq=128)  
 > 模型：Llama2-13B
 
@@ -54,8 +54,8 @@
 
 | label | stage | total | noc% | dram | row_conflict | energy(J) |
 |-------|-------|-------|------|------|--------------|-----------|
-| uniform | decode | 894342 | 0.5 | 557639 | 0 | 0.0124 |
-| interleave_size | decode | 1755244 | 0.3 | 7443842 | 0 | 0.0230 |
+| uniform | decode | 894356 | 0.5 | 557352 | 0 | 0.0124 |
+| interleave_size | decode | 1755076 | 0.3 | 7449540 | 0 | 0.0230 |
 | software_aware | decode | 1129668 | 0.4 | 2472960 | 0 | 0.0153 |
 ### D_noc_bw
 
@@ -114,7 +114,10 @@
 | NoC 批量竞争 | 按 SYNC region 批量估计传输，SPMD all-reduce 产生更高 noc% |
 | tensor-to-bank | MappingPlanner 接入 dram_sim burst 寻址 |
 | DRAM 权重读 | COMPUTE 的 DRAM 输入触发隐式读请求 |
-| dataflow 建模 | 单算子流水替代整层重复构建 |
+| 三范式等价计算 | SPMD/dataflow/compute-shift 统一为 8 路并行 (m/8) matmul，以通信开销区分 |
+| SPMD all-to-all 规约 | SPMD 改为全互连规约，NoC 占比最高（对应论文 49%） |
+| compute-shift bank 分散 | 激活切片按 core 分布到不同 bank，消除 bank-0 行冲突热点 |
+| 通信/计算重叠 (A2) | 关键路径 = 并行 compute + noc×serial_factor（SPMD 1.0 / dataflow 0.5 / shift 0.3） |
 | core group | dram_sim 组内同 row 请求合并降低 row_conflict |
 
 ## 已知局限
@@ -122,7 +125,7 @@
 - 绝对 cycle 数值与论文 Figure 不可直接对比（SCALE-Sim 简化图 + quick 规模）。
 - IPU emulator 验证（Figure 6）未集成。
 - row_conflict 在部分规模下为 0（访问模式未触发 Ramulator 冲突分类）。
-- dataflow 绝对性能仍可能高于 SPMD（算子数量差异），趋势以 noc% 为主。
+- 重叠模型为基于范式的 serial_factor 近似，未做微批次级精细流水时序。
 
 ## 说明
 
