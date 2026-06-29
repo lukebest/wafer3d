@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from voxelsim.api.ops import MemoryLocation
-from voxelsim.chip.config import ChipConfig
+from voxelsim.chip.config import ChipConfig, ComputationParadigm
 from voxelsim.chip.mapping import MappingPlanner
 from voxelsim.graph.events import EventKind, ExecutionEvent, ExecutionGraph
 from voxelsim.sim.core_sim import CoreSimulator
@@ -36,6 +36,7 @@ class SimulationEngine:
 
         stats = SimulationStats(num_events=len(graph.events))
         global_cycle = 0
+        core_compute: dict[int, int] = {}
 
         for event in graph.topological_order():
             ready = max((self._end_times.get(d, 0) for d in event.deps), default=0)
@@ -48,10 +49,16 @@ class SimulationEngine:
                 duration += dram_read
                 stats.compute_cycles += duration - dram_read
                 event.end_cycle = start + duration
+                cid = event.core_id or 0
+                core_compute[cid] = core_compute.get(cid, 0) + duration
 
             elif event.kind == EventKind.COPY_DATA:
-                duration = self._simulate_copy(event, start, stats)
+                duration, is_noc = self._simulate_copy(event, start, stats)
                 event.end_cycle = start + duration
+                if not is_noc:
+                    cid = (event.dest.core_id if event.dest and event.dest.core_id is not None
+                           else (event.src.core_id if event.src and event.src.core_id is not None else 0))
+                    core_compute[cid] = core_compute.get(cid, 0) + duration
 
             elif event.kind == EventKind.SYNC:
                 duration = 1
@@ -68,12 +75,39 @@ class SimulationEngine:
             self._end_times[event.event_id] = event.end_cycle
             global_cycle = max(global_cycle, event.end_cycle)
 
-        stats.total_cycles = global_cycle
+        compute_critical_path = max(core_compute.values()) if core_compute else 0
+        stats.total_cycles = self._apply_overlap(global_cycle, compute_critical_path, stats)
         stats.dram_access_cycles = self.dram_sim.total_dram_cycles
         stats.row_conflict_overhead_cycles = self.dram_sim.row_conflict_overhead
         stats.energy_joules = self.energy.estimate_total(stats)
         stats.breakdown = self.energy.breakdown
         return stats
+
+    def _apply_overlap(
+        self, makespan: int, compute_critical_path: int, stats: SimulationStats
+    ) -> int:
+        """Critical-path model with paradigm-aware NoC/compute overlap (paper A2).
+
+        Total = compute_critical_path (parallel per-core compute + DRAM loads)
+                + noc_serial, where noc_serial is the fraction of cumulative NoC
+                overhead that remains on the critical path after overlap.
+
+        SPMD's all-reduce is a serial barrier (no overlap -> factor 1.0).
+        Dataflow pipelines overlap half its NoC with compute (factor 0.5).
+        Compute-shift's 1-hop ring shift overlaps most (factor 0.3).
+
+        Because the credit is a fraction of NoC overhead (not of compute), a
+        lower-NoC paradigm always lands lower on the critical path, preserving
+        the paper's compute-shift < dataflow < SPMD ordering.
+        """
+        serial_factor = {
+            ComputationParadigm.SPMD: 1.0,
+            ComputationParadigm.DATAFLOW: 0.5,
+            ComputationParadigm.COMPUTE_SHIFT: 0.3,
+        }.get(self.config.computation_paradigm, 1.0)
+        noc_serial = int(stats.noc_overhead_cycles * serial_factor)
+        component_total = compute_critical_path + noc_serial
+        return max(component_total, makespan) if serial_factor >= 1.0 else max(component_total, compute_critical_path)
 
     def _prepare_bank_mapping(self, graph: ExecutionGraph) -> None:
         planner = MappingPlanner(self.config)
@@ -174,10 +208,14 @@ class SimulationEngine:
         event: ExecutionEvent,
         start: int,
         stats: SimulationStats,
-    ) -> int:
+    ) -> tuple[int, bool]:
+        """Return (duration, is_noc). is_noc marks core-to-core NoC transfers
+        (counted in the NoC serial term); DRAM loads count toward compute path."""
         duration = 0
+        is_noc = False
 
         if event.src and event.src.location == MemoryLocation.SRAM:
+            is_noc = True
             noc_lat = self._noc_latencies.get(event.event_id)
             if noc_lat is None:
                 src_core = event.src.core_id if event.src.core_id is not None else 0
@@ -206,6 +244,7 @@ class SimulationEngine:
                 event, start + duration, core_id=event.core_id
             )
             duration += dram_cycles
+            is_noc = False
 
         if (
             event.src
@@ -219,5 +258,6 @@ class SimulationEngine:
                 core_id=event.core_id or 0,
             )
             duration += dram_cycles
+            is_noc = False
 
-        return max(1, duration)
+        return max(1, duration), is_noc
