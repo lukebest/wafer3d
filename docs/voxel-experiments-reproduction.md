@@ -5,7 +5,7 @@
 > (Liu et al., arXiv:2604.26821v1, 2026)  
 > 中的**实验流程、参数扫掠与主要结果**，并给出可执行的复现步骤。
 >
-> 技术背景见 [voxel-simulator.md](voxel-simulator.md)；安装与后端构建见 [README.zh-CN.md](../README.zh-CN.md)。
+> 技术背景见 [voxel-simulator.md](voxel-simulator.md)；安装与后端构建见 [README.md](../README.md)。
 
 ---
 
